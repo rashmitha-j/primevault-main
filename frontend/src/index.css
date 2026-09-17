@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+#root {
+    font-family: "Inter",sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+
+
+
+.prata-regular {
+    font-family: "Prata", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  ::-webkit-scrollbar{
+    display: none;
+  }
