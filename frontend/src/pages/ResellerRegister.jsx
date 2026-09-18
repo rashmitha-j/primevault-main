@@ -17,7 +17,7 @@ const ResellerRegister = () => {
 
   const checkIfEmailRegistered = async (emailToCheck) => {
     try {
-      const res = await axios.get(`http://localhost:9000/api/reseller/check/${emailToCheck}`);
+      const res = await axios.get(`https://primevault-main.onrender.com/api/reseller/check/${emailToCheck}`);
       return res.data.isRegistered;
     } catch (error) {
       console.error("Error checking registration status:", error);
@@ -36,7 +36,7 @@ const ResellerRegister = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:9000/api/reseller/register', {
+      const res = await axios.post('https://primevault-main.onrender.com/api/reseller/register', {
         name,
         email,
         phone,

@@ -9,7 +9,7 @@ const AdminResellers = () => {
     // Fetch all resellers when the component is mounted
     const fetchResellers = async () => {
       try {
-        const res = await axios.get('http://localhost:9000/api/reseller/admin/resellers');
+        const res = await axios.get('https://primevault-main.onrender.com/api/reseller/admin/resellers');
         setResellers(res.data);
       } catch (err) {
         setMessage('Failed to fetch resellers.');
