@@ -11,7 +11,7 @@ const AdminResellers = () => {
       try {
         const res = await axios.get('https://primevault-main.onrender.com/api/reseller/admin/resellers');
         setResellers(res.data);
-      } catch (err) {
+      } catch {
         setMessage('Failed to fetch resellers.');
       }
     };
@@ -71,17 +71,13 @@ const AdminResellers = () => {
     backgroundColor: '#f1f1f1',
   };
 
-  const trLastStyle = {
-    borderBottom: 'none',
-  };
-
   return (
     <div style={containerStyle}>
       <h2 style={titleStyle}>Reseller List</h2>
       {message && <p style={messageStyle}>{message}</p>}
       <div style={tableContainerStyle}>
         <table className="min-w-full text-left text-gray-500" style={tableStyle}>
-          <thead   className="bg-gray-100 text-xs uppercase text-gray-700">
+          <thead className="bg-gray-100 text-xs uppercase text-gray-700">
             <tr>
               <th style={{ ...thTdStyle, ...thStyle }}>Name</th>
               <th style={thTdStyle}>Email</th>

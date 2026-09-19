@@ -7,7 +7,7 @@ export const fetchResellers = createAsyncThunk('adminResellers/fetchResellers', 
   try {
     const response = await axios.get('/api/resellers'); // Replace with your API endpoint
     return response.data;
-  } catch (error) {
+  } catch {
     throw Error('Failed to fetch resellers');
   }
 });

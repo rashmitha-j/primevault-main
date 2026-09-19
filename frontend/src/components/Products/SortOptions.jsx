@@ -18,7 +18,7 @@ const SortOptions = () => {
     <div className='mb-4 flex items-center justify-end'>
       <select id='sort'
       onChange={handleSortChange}
-      value={searchParams.get("sortBy" || "")}
+      value={searchParams.get("sortBy") || ""}
        className='border p-2 rounded-md focus:outline-none' >
         <option value="">Default</option>
         <option value="priceAsc">Price: Low to High</option>
@@ -30,4 +30,4 @@ const SortOptions = () => {
   )
 }
 
-export default SortOptions    
+export default SortOptions
