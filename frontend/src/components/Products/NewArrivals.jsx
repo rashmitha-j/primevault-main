@@ -18,9 +18,10 @@ const NewArrivals = () => {
         const fetchNewArrivals = async()=>{
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`);
-                setNewArrivals(response.data);
+                setNewArrivals(Array.isArray(response.data) ? response.data : response.data.products || []);
             } catch (error) {
                 console.error(error);
+                setNewArrivals([]);
             }
         };
         fetchNewArrivals();
