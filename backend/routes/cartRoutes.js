@@ -178,7 +178,8 @@ router.get("/", async(req, res) =>{
             res.json(cart);
 
         } else{
-            res.status(404).json({message : "Cart not found"}); 
+            // No cart yet (e.g. a new guest): return an empty cart instead of a 404
+            res.status(200).json({ products: [], totalPrice: 0 });
         }
     } catch (error) {
         console.error(error);
