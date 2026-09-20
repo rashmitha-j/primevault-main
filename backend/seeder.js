@@ -3,8 +3,7 @@ const dotenv = require("dotenv");
 
 const Product = require("./models/Product");
 const User = require("./models/User");
-const products = require("./data/products"); // Assuming this is the sample data
-const Cart = require("./models/Cart");
+const products = require("./data/products");
 
 dotenv.config();
 
@@ -14,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI);
 const seedData = async () => {
   try {
     // Check if the admin user already exists
-    const existingUser = await User.findOne({ email: "rrahulrahul220@gmail.com" });
+    const existingUser = await User.findOne({ email: "primevault.admin@gmail.com" });
 
     let createdUser;
     if (existingUser) {
@@ -24,22 +23,22 @@ const seedData = async () => {
       // Create a default admin user if none exists
       createdUser = await User.create({
         name: "Admin User",
-        email: "rrahulrahul220@gmail.com",
-        password: "Rahulmyprimevault",
+        email: "primevault.admin@gmail.com",
+        password: "Pv#Admin2026xQ",
         role: "admin",
       });
       console.log("✅ Admin user created successfully!");
     }
 
-    // ✅ Clear existing products before seeding
+    // Clear existing products before seeding
     await Product.deleteMany();
     console.log("✅ Existing products cleared.");
 
-    // Assign default user ID to products
+    // Assign the admin user ID to each product
     const userID = createdUser._id;
     const sampleProducts = products.map((product) => ({
       ...product,
-      user: userID, // Assign the admin user ID to each product
+      user: userID,
     }));
 
     // Insert the new products
