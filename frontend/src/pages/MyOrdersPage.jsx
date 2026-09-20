@@ -16,6 +16,13 @@ const MyOrdersPage = () => {
     navigate(`/orders/${orderId}`);
   };
 
+  // Works out the delivery status from the fields your database actually has
+  const getDeliveryStatus = (order) => {
+    if (order.isDelivered || order.status?.toLowerCase() === 'delivered') return 'delivered';
+    if (order.status?.toLowerCase() === 'shipped') return 'shipped';
+    return 'pending';
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -27,7 +34,6 @@ const MyOrdersPage = () => {
         <div className="overflow-x-auto max-h-[500px] sm:max-h-[600px]">
           <table className="min-w-full text-left text-gray-500">
             <thead className="bg-gray-100 text-xs uppercase text-gray-700">
-           
               <tr>
                 <th className="py-2 px-4 sm:py-3">Image</th>
                 <th className="py-2 px-4 sm:py-3">Order ID</th>
@@ -44,6 +50,7 @@ const MyOrdersPage = () => {
               {orders && orders.length > 0 ? (
                 orders.map((order) => {
                   const totalPrice = order.totalPrice || 0;
+                  const deliveryStatus = getDeliveryStatus(order);
 
                   return (
                     <tr
@@ -119,17 +126,14 @@ const MyOrdersPage = () => {
                       <td className="py-2 px-2 sm:py-4 sm:px-4">
                         <span
                           className={`${
-                            order.deliveryStatus === 'delivered'
+                            deliveryStatus === 'delivered'
                               ? 'bg-green-100 text-green-700'
-                              : order.deliveryStatus === 'shipped'
+                              : deliveryStatus === 'shipped'
                               ? 'bg-blue-100 text-blue-700'
                               : 'bg-yellow-100 text-yellow-700'
                           } px-2 py-1 rounded-full text-xs sm:text-sm font-medium`}
                         >
-                          {order.deliveryStatus
-                            ? order.deliveryStatus.charAt(0).toUpperCase() +
-                              order.deliveryStatus.slice(1)
-                            : 'Pending'}
+                          {deliveryStatus.charAt(0).toUpperCase() + deliveryStatus.slice(1)}
                         </span>
                       </td>
                     </tr>
